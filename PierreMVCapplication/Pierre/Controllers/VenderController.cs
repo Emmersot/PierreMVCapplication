@@ -11,8 +11,8 @@ namespace Pierre.Controllers
     [HttpGet("/venders")]
     public ActionResult Index()
     {
-      List<Artist> allArtists = Artist.GetAll();
-      return View(allArtists);
+      List<Vender> allVenders = Vender.GetAll();
+      return View(allVenders);
     }
 
     [HttpGet("/venders/new")]
@@ -33,7 +33,7 @@ namespace Pierre.Controllers
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Vender selectedVender = Vender.Find(id);
-      List<Vender> venderOrders = selectedVender.Orders;
+      List<Order> venderOrders = selectedVender.Orders;
       model.Add("vender", selectedVender);
       model.Add("orders", venderOrders);
       return View(model);
@@ -43,7 +43,7 @@ namespace Pierre.Controllers
     // This one creates new Items within a given Category, not new Categories:
 
     [HttpPost("/venders/{venderId}/orders")]
-    public ActionResult Create(int venderId, string songName)
+    public ActionResult Create(int venderId, string orderName)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Vender foundVender = Vender.Find(venderId);
